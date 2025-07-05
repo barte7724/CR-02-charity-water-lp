@@ -1,19 +1,311 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>charity: water</title>
-  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body, html {
+      height: 100%;
+      font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      color: white;
+      background: #000;
+      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* Top header with logo and title */
+    .top-header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      padding: 30px 20px 20px 20px;
+      flex-shrink: 0;
+    }
+
+    .top-header .logo {
+      width: 80px;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .top-header .logo:hover {
+      transform: scale(1.1);
+    }
+
+    .top-header h1 {
+      font-family: Georgia, serif;
+      font-size: 3rem;
+      font-weight: 700;
+      text-transform: lowercase;
+      letter-spacing: 0.2em;
+      line-height: 1.3;
+      text-shadow: 2px 2px 5px rgba(0,0,0,0.7);
+      color: white;
+      user-select: none;
+    }
+
+    header.hero {
+      position: relative;
+      height: 65vh;
+      background-image: url('./img/IMG_0145.jpeg');
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-size: cover;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 0 20px;
+      flex-shrink: 0;
+    }
+
+    .overlay {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.55);
+      z-index: 1;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 700px;
+    }
+
+    header.hero h2 {
+      font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: 1.5rem;
+      font-weight: 400;
+      margin-bottom: 1.5rem;
+      letter-spacing: 0.05em;
+      line-height: 1.4;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.6);
+    }
+
+    header.hero p {
+      font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: 1.1rem;
+      line-height: 1.8;
+      margin-bottom: 3rem;
+      text-shadow: 1px 1px 4px rgba(0,0,0,0.6);
+    }
+
+    .cta-bar {
+      background: rgba(255, 255, 255, 0.15);
+      padding: 20px 35px;
+      border-radius: 30px;
+      display: inline-flex;
+      align-items: center;
+      gap: 30px;
+      font-style: italic;
+      font-weight: 600;
+      box-shadow: 0 0 10px rgba(255,255,255,0.15);
+      user-select: none;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 3rem;
+      position: relative;
+      overflow: visible;
+      font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    }
+
+    .cta-bar span {
+      flex: 1 1 auto;
+      font-size: 1rem;
+      color: #f0f0f0;
+      min-width: 220px;
+    }
+
+    .cta-button {
+      background: #FFC907;
+      color: white;
+      padding: 12px 30px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1rem;
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+      flex-shrink: 0;
+      cursor: pointer;
+      position: relative;
+      overflow: visible;
+      user-select: none;
+      font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    }
+
+    .cta-button:hover {
+      background: #e6bc00;
+      box-shadow: 0 6px 15px rgba(230, 188, 0, 0.9);
+    }
+
+    .droplet {
+      position: absolute;
+      bottom: 100%;
+      width: 10px;
+      height: 15px;
+      background: #00bfffcc;
+      border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+      opacity: 0.8;
+      animation-name: fall;
+      animation-timing-function: ease-in;
+      animation-iteration-count: 1;
+      animation-fill-mode: forwards;
+      pointer-events: none;
+      filter: drop-shadow(0 0 2px #00bfff);
+      z-index: 10;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(0) scale(1);
+        opacity: 0.8;
+      }
+      100% {
+        transform: translateY(120px) scale(0.3);
+        opacity: 0;
+      }
+    }
+
+    section.our-story {
+      background: #fff;
+      padding: 50px 20px;
+      text-align: center;
+      max-width: 800px;
+      margin: 40px auto 60px auto;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.05);
+      color: #111;
+      font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    }
+
+    section.our-story h3 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+      letter-spacing: 0.1em;
+      font-weight: 700;
+    }
+
+    section.our-story p {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    @media (max-width: 600px) {
+      .top-header h1 {
+        font-size: 2.2rem;
+      }
+
+      header.hero {
+        height: 60vh;
+      }
+
+      header.hero h2 {
+        font-size: 1.2rem;
+      }
+
+      header.hero p {
+        font-size: 1rem;
+      }
+
+      .cta-bar {
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      .cta-bar span {
+        min-width: auto;
+        text-align: center;
+      }
+
+      .cta-button {
+        width: 100%;
+        text-align: center;
+        padding: 14px 0;
+      }
+
+      section.our-story h3 {
+        font-size: 1.5rem;
+      }
+
+      section.our-story p {
+        font-size: 1rem;
+      }
+
+      .top-header {
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      .top-header .logo {
+        width: 60px;
+      }
+    }
+  </style>
 </head>
 <body>
 
+  <!-- Top header with logo and lowercase title -->
+  <div class="top-header">
+    <img src="img/water-can-transparent.png" alt="charity: water logo" class="logo" />
+    <h1>charity: water</h1>
+  </div>
+
+  <!-- Hero Section -->
   <header class="hero">
-    <div class="overlay">
-      <div class="hero-content">
-        <img src="img/logo-placeholder.png" alt="charity: water logo" class="logo" />
-        <h1>charity: water</h1>
-        <h2>Change Begins with the World’s Most Powerful Resource: Water</h2>
-        <p>
-          Clean water opens the door to learning, healing, and possibility. When you support in any way, you help communities thrive with the most essen
+    <div class="overlay"></div>
+    <div class="hero-content">
+      <h2>Change Begins with the World’s Most Powerful Resource: Water</h2>
+      <p>
+        Clean water opens the door to learning, healing, and possibility. When you support in any way, you help communities thrive with the most essential resource on Earth.
+      </p>
+
+      <div class="cta-bar">
+        <span>In Every Drop, We Redefine Humanity's Legacy...</span>
+        <button class="cta-button" id="ctaBtn">Give Water, Give Life</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Our Story Section -->
+  <section class="our-story" aria-label="Our Story">
+    <h3>Our Story</h3>
+    <p>
+      charity: water was founded to bring clean and safe drinking water to people in underprivledged communities, where millions suffer daily without this basic necessity. We believe that young activists like you have the power to create massive change by raising awareness and rallying communities. Join us to make a tangible difference ; because every drop counts, and your voice can help turn the tide. Together, we can build a future where no one has to live without clean water.
+    </p>
+  </section>
+
+  <script>
+    const btn = document.getElementById('ctaBtn');
+    const ctaBar = btn.parentElement;
+
+    btn.addEventListener('click', () => {
+      for (let i = 0; i < 7; i++) {
+        const droplet = document.createElement('div');
+        droplet.classList.add('droplet');
+        const left = Math.random() * (btn.offsetWidth - 10);
+        droplet.style.left = `${btn.offsetLeft + left}px`;
+        droplet.style.bottom = '100%';
+        droplet.style.animationDuration = (0.8 + Math.random() * 0.6) + 's';
+        droplet.style.animationDelay = (Math.random() * 0.3) + 's';
+        ctaBar.appendChild(droplet);
+        droplet.addEventListener('animationend', () => droplet.remove());
+      }
+    });
+  </script>
+
+</body>
+</html>
